@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.addBook = addBook;
 exports.listBooks = listBooks;
 exports.searchBook = searchBook;
+exports.deleteBook = deleteBook;
 // Fungsi addBook
 // Fungsi ini digunakan untuk menambahkan buku baru ke dalam koleksi
 // Parameter yang dibutuhkan: data buku sesuai tipe Book
@@ -23,12 +24,12 @@ exports.searchBook = searchBook;
 const books_1 = require("../data/books");
 function addBook(book) {
     books_1.books.push(book);
-    console.log(`The book ${book.title} was successfully added`);
+    console.log(`\nThe book "${book.title}" was successfully added\n`);
 }
 function listBooks() {
     console.log('\n         === Book List ===');
     if (books_1.books.length === 0) {
-        console.log('there are no books in the collection. ');
+        console.log('\nthere are no books in the collection. \n');
         return;
     }
     books_1.books.forEach((book, index) => {
@@ -37,5 +38,26 @@ function listBooks() {
 }
 function searchBook(title) {
     console.log('\n    === Book Search Results ===');
+    if (!title) {
+        console.log('Enter keyword');
+        return;
+    }
+    const foundBooks = books_1.books.filter((book) => book.title.toLowerCase().includes(title.toLowerCase()));
+    if (foundBooks.length === 0) {
+        console.log('\nBook not found\n');
+        return;
+    }
+    foundBooks.forEach((book, index) => {
+        console.log(`${index + 1}. ${book.title} - ${book.author} (${book.publicationYear})`);
+    });
+}
+function deleteBook(title) {
+    const index = books_1.books.findIndex((book) => book.title.toLowerCase() === title.toLowerCase());
+    if (index === -1) {
+        console.log(`\n"${title}" not found\n`);
+        return;
+    }
+    const deleteBook = books_1.books.splice(index, 1);
+    console.log(`\n"${deleteBook[0].title}" successfully deleted\n`);
 }
 // listBooks();
