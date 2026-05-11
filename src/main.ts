@@ -7,8 +7,24 @@
 //   4. Uji fungsi searchBook dengan dan tanpa parameter
 // Silakan bereksplorasi untuk memastikan semua fungsi berjalan dengan baik
 
-console.log("Book Management Application - Week 6");
-console.log("=====================================");
+import {
+  addBook,
+  listBooks,
+  searchBook,
+  deleteBook,
+} from './functions/bookManager';
+
+console.log('Book Management Application - Week 6');
+console.log('=====================================');
 
 // Mulai pengujian di bawah ini
 
+addBook({
+  title: 'test book',
+  author: 'karangan sendiri',
+  publicationYear: 2026,
+});
+
+listBooks();
+searchBook('title');
+deleteBook('title');
